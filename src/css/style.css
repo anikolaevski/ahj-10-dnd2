@@ -1,0 +1,59 @@
+body {
+  background: #eee;
+  text-align: center;
+  width: 800px;
+  margin: 0 auto;
+  font-size: 16px;
+}
+.invisible {
+  display: none;
+}
+.errormsg {
+  color: #f00;
+}
+.successmsg {
+  color: #0c0;
+}
+
+.enterform {
+  margin: 0 auto 10px 15%;
+  width: 100%;
+  display: flex;
+  justify-content: start;
+}
+.enterform * {
+  margin: 5px;
+}
+
+.show_table {
+  max-width: 800px;
+  margin: 0 auto;
+}
+.show_table, .show_table th, .show_table td {
+    padding: 0.5rem 1rem;
+    border-collapse: collapse;
+    border: 1px solid #bbb;
+}
+
+.show_table td {
+  text-align: left;
+}
+
+.show_table .tab-url {
+  max-width: 300px;
+}
+
+.delete-box {
+  background-image: url("../img/delete_sign-512.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+  box-sizing: border-box;
+  background-position: center;
+  background-color: gray;
+  width: 1.5rem;
+  height: 1.5rem;
+  position: absolute;
+  /* top: 0.5rem; */
+  right: 0.5rem;
+  z-index: 999;
+}
