@@ -52,7 +52,7 @@ body {
   background-color: gray;
   width: 1.5rem;
   height: 1.5rem;
-  position: absolute;
+  position: relative;
   /* top: 0.5rem; */
   right: 0.5rem;
   z-index: 999;

@@ -63,8 +63,8 @@ function prepDeleteElement(td) {
   const div = document.createElement('div');
   td.appendChild(div);
   div.classList.add('delete-box');
-  div.style.top = `${td.offsetTop + 140}px`;
-  div.style.left = `${td.offsetLeft + td.offsetWidth + 400}px`;
+  div.style.top = `${-td.offsetHeight + 40}px`;
+  div.style.left = `${td.offsetWidth - 50}px`;
   div.addEventListener('click', OptDoRemove);
 }
 
