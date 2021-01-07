@@ -9,6 +9,17 @@ function removeDelBox(el) {
   }
 }
 
+function setState(state) {
+  const enterfileState = document.querySelector('#enterfileState');
+  if (!enterfileState) { return; }
+  if (state) {
+    enterfileState.innerHTML = '<p class="successmsg">Ссылка добавлена</p>';
+  } else {
+    enterfileState.innerHTML = '<p class="errormsg">Неверный URL изображения</p>';
+  }
+  enterfileState.classList.remove('invisible');
+}
+
 function SaveContent(name, el) {
   const el2 = el.cloneNode();
   el2.innerHTML = el.innerHTML;
@@ -41,7 +52,10 @@ function LoadContent(name, el) {
       prepDeleteElement(TabImg);
     }
   });
-  // console.log(name, app);
+  const enterfileState = document.querySelector('#enterfileState');
+  if (enterfileState) {
+    enterfileState.classList.add('invisible');
+  }
 }
 
 function OptDoRemove(evt) {
@@ -105,10 +119,10 @@ document.querySelector('#enterbutton').addEventListener('click', (evt) => {
     prepDeleteElement(td2);
     SaveContent('imgManager', ImageTbody);
     enterfile.value = '';
+    setState(true);
   };
   img.onerror = () => {
-  /* eslint-disable no-console */
-    console.log('error');
+    setState(false);
   };
   TestImage.appendChild(img);
 });
