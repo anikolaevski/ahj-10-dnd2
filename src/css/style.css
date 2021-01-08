@@ -57,3 +57,13 @@ body {
   right: 0.5rem;
   z-index: 999;
 }
+
+.dropzone {
+  position: fixed;
+  height: 50px;
+  width: 300px;
+  margin: 0.5rem auto 1rem 800px;
+  padding: 0.5rem 1rem;
+  border-collapse: collapse;
+  border: 1px solid #bbb;
+}

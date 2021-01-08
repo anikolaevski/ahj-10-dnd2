@@ -99,33 +99,46 @@ document.querySelector('#enterbutton').addEventListener('click', (evt) => {
   img.src = enterfile.value;
   img.alt = 'test image';
   img.onload = () => {
-    // console.log('success');
-    const ImageTbody = document.querySelector('[data-id=image_tbody]');
-    if (!ImageTbody) { return; }
-    const tr = document.createElement('tr');
-    ImageTbody.appendChild(tr);
-    const td1 = document.createElement('td');
-    td1.classList.add('tab-url');
-    td1.innerHTML = `<a href="${enterfile.value}">${enterfile.value.substring(0, 20)}...</a>`;
-    tr.appendChild(td1);
-    const td2 = document.createElement('td');
-    const img2 = document.createElement('img');
-    img2.src = enterfile.value;
-    img2.alt = 'test image';
-    img2.width = '500';
-    td2.classList.add('tab-img');
-    td2.appendChild(img2);
-    tr.appendChild(td2);
-    prepDeleteElement(td2);
-    SaveContent('imgManager', ImageTbody);
+    refillTable(enterfile.value);
     enterfile.value = '';
-    setState(true);
   };
   img.onerror = () => {
     setState(false);
+    enterfile.value = '';
   };
   TestImage.appendChild(img);
 });
+
+function refillTable(url) {
+  // console.log('success');
+  const ImageTbody = document.querySelector('[data-id=image_tbody]');
+  if (!ImageTbody) { return; }
+  const tr = document.createElement('tr');
+
+  const refElement = ImageTbody.firstChild;
+  if (refElement) {
+    ImageTbody.insertBefore(tr, refElement);
+  } else {
+    ImageTbody.appendChild(tr);
+  }
+
+  const td1 = document.createElement('td');
+  td1.classList.add('tab-url');
+  td1.innerHTML = `<a href="${url}">${url.substring(0, 20)}...</a>`;
+  tr.appendChild(td1);
+  const td2 = document.createElement('td');
+  const img2 = document.createElement('img');
+  img2.src = url;
+  img2.alt = 'test image';
+  img2.width = '500';
+  td2.classList.add('tab-img');
+  td2.appendChild(img2);
+  tr.appendChild(td2);
+  prepDeleteElement(td2);
+  SaveContent('imgManager', ImageTbody);
+  // enterfile.value = '';
+  setState(true);
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // eslint-disable-next-line no-console
@@ -133,4 +146,43 @@ document.addEventListener('DOMContentLoaded', () => {
   LoadContent('imgManager', ImageTbody);
   /* eslint-disable no-console */
   console.log('Module started!');
+});
+
+const dropEl = document.querySelector('#dropzine');
+
+dropEl.addEventListener('dragover', (evt) => {
+  evt.preventDefault();
+});
+
+dropEl.addEventListener('drop', (evt) => {
+  evt.preventDefault();
+  const droppedHTML = evt.dataTransfer.getData('text/html');
+  if (droppedHTML) {
+    let prevdiv = dropEl.querySelector('div');
+    while (prevdiv) {
+      dropEl.removeChild(prevdiv);
+      prevdiv = dropEl.querySelector('div');
+    }
+    const div = document.createElement('div');
+    div.classList.add('invisible');
+    dropEl.appendChild(div);
+    div.innerHTML = droppedHTML;
+    const img = div.querySelector('img');
+    const bg = div.querySelector('[style*=background-image]');
+    // console.log(img);
+    if (img) {
+      refillTable(img.src);
+    } else if (bg) {
+      const x = bg.style.backgroundImage.slice(4, -1).replace(/"/g, '');
+      if (x) {
+        refillTable(x);
+      }
+    } else {
+      // console.log(droppedHTML);
+      setState(false);
+    }
+  } else {
+    // console.log('Пусто');
+    setState(false);
+  }
 });
