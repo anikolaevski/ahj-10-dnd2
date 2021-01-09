@@ -2,7 +2,7 @@ body {
   background: #eee;
   text-align: center;
   width: 800px;
-  margin: 0 auto;
+  margin: 0 45% 0 auto;
   font-size: 16px;
 }
 .invisible {
@@ -16,7 +16,7 @@ body {
 }
 
 .enterform {
-  margin: 0 auto 10px 15%;
+  margin: 40px auto 30px auto;
   width: 100%;
   display: flex;
   justify-content: start;
@@ -60,8 +60,8 @@ body {
 
 .dropzone {
   position: fixed;
-  height: 50px;
-  width: 300px;
+  height: 250px;
+  width: 600px;
   margin: 0.5rem auto 1rem 800px;
   padding: 0.5rem 1rem;
   border-collapse: collapse;
